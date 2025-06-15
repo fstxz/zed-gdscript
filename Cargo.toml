@@ -1,16 +1,13 @@
 [package]
 name = "zed_gdscript"
-version = "0.4.0"
+version = "0.4.1"
 edition = "2021"
 publish = false
 license = "MIT"
 
-# [lints]
-# workspace = true
-
 [lib]
 path = "src/gdscript.rs"
-crate-type = ["cdylib"]
+crate-type = [ "cdylib",]
 
 [dependencies]
 zed_extension_api = "0.0.6"
