@@ -16,6 +16,10 @@
     )
 )
 
+(constructor_definition
+    "func" @context
+    "_init" @name) @item
+
 ; Variables. Only capture properties, not local variables.
 (source
     (variable_statement
