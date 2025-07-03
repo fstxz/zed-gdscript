@@ -1,5 +1,10 @@
+use std::net::Ipv4Addr;
+
 use zed::LanguageServerId;
-use zed_extension_api::{self as zed, Result};
+use zed_extension_api::{
+    self as zed, serde_json::Value, DebugAdapterBinary, DebugTaskDefinition, Result,
+    StartDebuggingRequestArguments, StartDebuggingRequestArgumentsRequest, TcpArguments, Worktree,
+};
 
 struct GDScriptExtension;
 
@@ -37,6 +42,43 @@ impl zed::Extension for GDScriptExtension {
             args: args.unwrap_or(vec!["127.0.0.1".to_string(), "6005".to_string()]),
             env: Default::default(),
         })
+    }
+
+    fn get_dap_binary(
+        &mut self,
+        _adapter_name: String,
+        config: DebugTaskDefinition,
+        _user_provided_debug_adapter_path: Option<String>,
+        _worktree: &Worktree,
+    ) -> Result<DebugAdapterBinary, String> {
+        Ok(DebugAdapterBinary {
+            command: None,
+            arguments: vec![],
+            envs: Default::default(),
+            cwd: None,
+
+            // Godot only uses TCP for debugging
+            connection: Some(TcpArguments {
+                // TODO: api uses `u32` for host but official implementations are using `Ipv4Addr`
+                // So we need to keep an eye on this
+                host: Ipv4Addr::new(127, 0, 0, 1).to_bits(),
+                port: 6006,
+                timeout: None,
+            }),
+
+            request_args: StartDebuggingRequestArguments {
+                configuration: config.config,
+                request: StartDebuggingRequestArgumentsRequest::Launch,
+            },
+        })
+    }
+
+    fn dap_request_kind(
+        &mut self,
+        _adapter_name: String,
+        _config: Value,
+    ) -> Result<StartDebuggingRequestArgumentsRequest, String> {
+        Ok(StartDebuggingRequestArgumentsRequest::Launch) // TODO: test if attach or launch
     }
 }
 

@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "properties": {
+    "type": { "const": "godot" },
+    "request": { "enum": ["attach", "launch"] },
+    "name": { "type": "string" },
+    "project": { "type": "string" },
+    "launch_scene": { "type": "boolean", "default": true }
+  },
+  "required": ["type", "request", "project"]
+}
