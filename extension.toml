@@ -17,7 +17,7 @@ language = "GDScript"
 
 [grammars.gdscript]
 repository = "https://github.com/PrestonKnopp/tree-sitter-gdscript"
-commit = "1f1e782fe2600f50ae57b53876505b8282388d77"
+commit = "0b9f60ebaa1c31f5153dd3a3b283ca0725734378"
 
 [grammars.godot_resource]
 repository = "https://github.com/PrestonKnopp/tree-sitter-godot-resource"

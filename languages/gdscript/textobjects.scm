@@ -1,5 +1,5 @@
 (class_definition
-  (body) @class.inside) @class.around
+  (class_body) @class.inside) @class.around
 
 (function_definition
   (body) @function.inside) @function.around
