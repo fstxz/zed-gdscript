@@ -9,7 +9,7 @@
         name: (_) @name) @item
 )
 (class_definition
-    (body
+    (class_body
         (function_definition
             "func" @context
             name: (_) @name) @item
@@ -34,7 +34,7 @@
         name: (_) @name
     ) @item)
 (class_definition
-    (body
+    (class_body
         ( variable_statement
             "var" @context
             name: (_) @name) @item))
@@ -52,7 +52,7 @@
         "const" @context
         name: (_) @name) @item)
 (class_definition
-    (body
+    (class_body
         (const_statement
             "const" @context
             name: (_) @name) @item))

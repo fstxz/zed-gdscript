@@ -35,7 +35,6 @@
 (enumerator (identifier) @type.enum.variant)
 [
   (null)
-  (underscore)
 ] @type.builtin
 
 
