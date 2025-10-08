@@ -40,9 +40,9 @@
 (attribute
   (identifier)
   (identifier) @variable.other.member)
-(attribute
-  (identifier) @type.builtin
-  (#match? @type.builtin "^(AABB|Array|Basis|bool|Callable|Color|Dictionary|float|int|NodePath|Object|Packed(Byte|Color|String)Array|PackedFloat(32|64)Array|PackedInt(32|64)Array|PackedVector(2|3)Array|Plane|Projection|Quaternion|Rect2([i]{0,1})|RID|Signal|String|StringName|Transform(2|3)D|Variant|Vector(2|3|4)([i]{0,1}))$"))
+
+((identifier) @type.builtin
+  (#match? @type.builtin "^(AABB|Array|Basis|bool|Callable|Color|Dictionary|float|int|NodePath|Object|Packed(Byte|Color|String)Array|PackedFloat(32|64)Array|PackedInt(32|64)Array|PackedVector(2|3|4)Array|Plane|Projection|Quaternion|Rect2([i]{0,1})|RID|Signal|String|StringName|Transform(2|3)D|Variant|Vector(2|3|4)([i]{0,1}))$"))
 
 [
   (string_name)
