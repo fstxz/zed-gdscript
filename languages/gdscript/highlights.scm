@@ -29,8 +29,6 @@
 (string) @string
 
 (type) @type
-(expression_statement (array (identifier) @type))
-(binary_operator (identifier) @type)
 (enum_definition (name) @type.enum)
 (enumerator (identifier) @type.enum.variant)
 [
