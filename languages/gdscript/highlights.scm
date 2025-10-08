@@ -1,10 +1,4 @@
-; Identifier naming conventions
-
-(
-  (identifier) @constant
-  (#match? @constant "^[A-Z][A-Z\\d_]+$"))
-
-; class
+; Class
 (class_name_statement (name) @type)
 (class_definition (name) @type)
 
@@ -154,3 +148,9 @@
   "get"
   "await"
 ] @keyword
+
+; Identifier naming conventions
+; This needs to be at the very end in order to override earlier queries
+(
+  (identifier) @constant
+  (#match? @constant "^[A-Z][A-Z\\d_]+$"))
