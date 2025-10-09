@@ -13,9 +13,9 @@
 
 (function_definition
   name: (name) @function
-  parameters: (parameters) @variable.parameter )
+  parameters: (parameters) @variable)
 (constructor_definition "_init" @function)
-(lambda (parameters) @variable.parameter)
+(lambda (parameters) @variable)
 
 
 ;; Literals
@@ -23,20 +23,20 @@
 (string) @string
 
 (type) @type
-(enum_definition (name) @type.enum)
-(enumerator (identifier) @type.enum.variant)
+(enum_definition (name) @type)
+(enumerator (identifier) @variant)
 [
   (null)
-] @type.builtin
+] @type
 
 
 (variable_statement (identifier) @variable)
 (attribute
   (identifier)
-  (identifier) @variable.other.member)
+  (identifier) @variable)
 
-((identifier) @type.builtin
-  (#match? @type.builtin "^(AABB|Array|Basis|bool|Callable|Color|Dictionary|float|int|NodePath|Object|Packed(Byte|Color|String)Array|PackedFloat(32|64)Array|PackedInt(32|64)Array|PackedVector(2|3|4)Array|Plane|Projection|Quaternion|Rect2([i]{0,1})|RID|Signal|String|StringName|Transform(2|3)D|Variant|Vector(2|3|4)([i]{0,1}))$"))
+((identifier) @type
+  (#match? @type "^(AABB|Array|Basis|bool|Callable|Color|Dictionary|float|int|NodePath|Object|Packed(Byte|Color|String)Array|PackedFloat(32|64)Array|PackedInt(32|64)Array|PackedVector(2|3|4)Array|Plane|Projection|Quaternion|Rect2([i]{0,1})|RID|Signal|String|StringName|Transform(2|3)D|Variant|Vector(2|3|4)([i]{0,1}))$"))
 
 [
   (string_name)
@@ -46,13 +46,17 @@
 (signal_statement (name) @label)
 
 (const_statement (name) @constant)
-(integer) @constant.numeric.integer
-(float) @constant.numeric.float
-(escape_sequence) @constant.character.escape
+
+[
+  (integer)
+  (float)
+] @number
+
+(escape_sequence) @string.escape
 [
   (true)
   (false)
-] @constant.builtin.boolean
+] @boolean
 
 [
   "+"
@@ -84,63 +88,43 @@
   "<<"
   ">>"
   ":="
+  "<<="
+  ">>="
 ] @operator
 
-(annotation (identifier) @keyword.storage.modifier)
+; Keywords
+(annotation (identifier) @keyword)
+
+[
+  (remote_keyword)
+  (static_keyword)
+] @keyword
 
 [
   "if"
   "else"
   "elif"
   "match"
-] @keyword.control.conditional
-
-[
   "while"
   "for"
-] @keyword.control.repeat
-
-[
   "return"
   "pass"
   "break"
   "continue"
-] @keyword.control.return
-
-[
   "func"
-] @keyword.control.function
-
-[
-  "export"
-] @keyword.control.import
-
-[
   "in"
   "is"
   "as"
   "and"
   "or"
   "not"
-] @keyword.operator
-
-[
   "var"
   "class"
   "class_name"
   "enum"
-] @keyword.storage.type
-
-
-[
-  (remote_keyword)
-  (static_keyword)
   "const"
   "signal"
   "@"
-] @keyword.storage.modifier
-
-[
   "setget"
   "onready"
   "extends"
