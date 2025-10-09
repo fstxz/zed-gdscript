@@ -20,6 +20,10 @@
 
 ;; Literals
 (comment) @comment
+[
+  (region_start)
+  (region_end)
+] @comment.doc
 (string) @string
 
 (type) @type
