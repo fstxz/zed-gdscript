@@ -29,10 +29,7 @@
 (type) @type
 (enum_definition (name) @type)
 (enumerator (identifier) @variant)
-[
-  (null)
-] @type
-
+(null) @type
 
 (variable_statement (identifier) @variable)
 (attribute
@@ -40,7 +37,7 @@
   (identifier) @variable)
 
 ((identifier) @type
-  (#match? @type "^(AABB|Array|Basis|bool|Callable|Color|Dictionary|float|int|NodePath|Object|Packed(Byte|Color|String)Array|PackedFloat(32|64)Array|PackedInt(32|64)Array|PackedVector(2|3|4)Array|Plane|Projection|Quaternion|Rect2([i]{0,1})|RID|Signal|String|StringName|Transform(2|3)D|Variant|Vector(2|3|4)([i]{0,1}))$"))
+  (#match? @type "^(bool|float|int)$"))
 
 [
   (string_name)
@@ -139,6 +136,12 @@
 
 ; Identifier naming conventions
 ; This needs to be at the very end in order to override earlier queries
+
+; Mark identifiers that start with a capital letter as types
+(
+  (identifier) @type
+  (#match? @type "^[A-Z]+"))
+
 (
   (identifier) @constant
   (#match? @constant "^[A-Z][A-Z\\d_]+$"))
