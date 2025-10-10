@@ -20,6 +20,8 @@
 
 ;; Literals
 (comment) @comment
+((comment) @comment.doc
+  (#match? @comment.doc "^##"))
 [
   (region_start)
   (region_end)
