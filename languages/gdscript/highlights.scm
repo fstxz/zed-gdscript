@@ -65,6 +65,7 @@
   "+"
   "-"
   "*"
+  "**"
   "/"
   "%"
   "=="
@@ -135,6 +136,9 @@
   "get"
   "await"
 ] @keyword
+
+((identifier) @keyword
+  (#match? @keyword "^self$"))
 
 ; Identifier naming conventions
 ; This needs to be at the very end in order to override earlier queries
