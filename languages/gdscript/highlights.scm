@@ -36,7 +36,7 @@
 (variable_statement (identifier) @variable)
 (attribute
   (identifier)
-  (identifier) @variable)
+  (identifier) @property)
 
 ((identifier) @type
   (#match? @type "^(bool|float|int)$"))
@@ -138,7 +138,7 @@
 ] @keyword
 
 ((identifier) @keyword
-  (#match? @keyword "^self$"))
+  (#match? @keyword "^(self|super)$"))
 
 ; Identifier naming conventions
 ; This needs to be at the very end in order to override earlier queries
