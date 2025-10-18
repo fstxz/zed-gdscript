@@ -94,6 +94,7 @@
   ":="
   "<<="
   ">>="
+  "**="
 ] @operator
 
 ; Keywords
@@ -102,6 +103,7 @@
 [
   (remote_keyword)
   (static_keyword)
+  (breakpoint_statement)
 ] @keyword
 
 [
