@@ -19,29 +19,35 @@ impl zed::Extension for GDScriptExtension {
         _language_server_id: &zed::LanguageServerId,
         worktree: &zed::Worktree,
     ) -> Result<zed::Command> {
-        let (os, _) = zed::current_platform();
-        let nc_command = if os == zed::Os::Windows {
-            worktree.which("ncat").or_else(|| worktree.which("nc"))
-        } else {
-            worktree.which("nc").or_else(|| worktree.which("ncat"))
-        };
-
-        let path = nc_command
-            .ok_or_else(|| "nc or ncat must be installed and available on your PATH".to_string())?;
-
         let lsp_settings = zed::settings::LspSettings::for_worktree("gdscript", worktree);
         let mut args = None;
+        let mut path = None;
+        let mut env = None;
 
         if let Ok(lsp_settings) = lsp_settings {
             if let Some(binary) = lsp_settings.binary {
                 args = binary.arguments;
+                path = binary.path;
+                env = binary.env;
+            }
+        }
+
+        // If the user didn't specify the binary, fall back to nc/ncat.
+        if path.is_none() {
+            let (os, _) = zed::current_platform();
+
+            path = if os == zed::Os::Windows {
+                worktree.which("ncat").or_else(|| worktree.which("nc"))
+            } else {
+                worktree.which("nc").or_else(|| worktree.which("ncat"))
             }
         }
 
         Ok(zed::Command {
-            command: path,
+            command: path
+                .ok_or("nc or ncat must be installed and available on your PATH".to_string())?,
             args: args.unwrap_or(vec!["127.0.0.1".to_string(), "6005".to_string()]),
-            env: Default::default(),
+            env: env.unwrap_or_default().into_iter().collect(),
         })
     }
 
